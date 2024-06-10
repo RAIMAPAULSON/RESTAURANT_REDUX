@@ -28,7 +28,7 @@ const Restaurant = () => {
   return (
     <div>
     <Header insideHeader={true} />
-    <div style={{ marginTop: '150px' }} className="container-fluid">
+    <div style={{ marginTop: '150px' }} className="container">
                 {Loading ?
                 <div className='text-center mt-5 fw-bolder'>
                  <Spinner className='me-2' animation="border" variant="info" />Loading...
@@ -38,7 +38,7 @@ const Restaurant = () => {
                     {
                     allRestaurants?.length>0 ?
                     allRestaurants?.map(product=>(
-                     <Col key={product?.id} className='mb-5' sm={12} md={6} lg={4} xl={3}>
+                     <Col key={product?.id} className='mb-5' sm={12} md={6} lg={6} xl={6}>
                         <Card className='shadow rounded'>
                             <Card.Img height={'180px'} variant="top" src={product?.photograph} />
                             <Card.Body>

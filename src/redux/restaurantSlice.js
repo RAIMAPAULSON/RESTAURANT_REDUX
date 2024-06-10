@@ -4,6 +4,7 @@ import axios from "axios";
 export const fetchRestaurantDetails= createAsyncThunk('restaurants/fetchRestaurantDetails',async(page=1)=>{
     const result = await axios.get(`http://localhost:3000/restaurants?_page=${page}&_per_page=4`);
     console.log("-----------???-",result)
+    localStorage.setItem("allRestaurants",JSON.stringify(result.data.data));
     return result.data.data;
 })
 const restaurantSlice = createSlice({
@@ -25,8 +26,9 @@ const restaurantSlice = createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchRestaurantDetails.fulfilled,(state,action)=>{
-            state.allRestaurants=action.payload.data,
-            state.allRestaurantsDummy=action.payload.data,
+            state.allRestaurants=action.payload,
+            console.log("..."+action.payload)
+            state.allRestaurantsDummy=action.payload,
             state.Loading=false,
             state.error=""
         })
