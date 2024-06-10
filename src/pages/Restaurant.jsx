@@ -39,12 +39,12 @@ const Restaurant = () => {
                     allRestaurants?.length>0 ?
                     allRestaurants?.map(product=>(
                      <Col key={product?.id} className='mb-5' sm={12} md={6} lg={6} xl={6}>
-                        <Card className='shadow rounded'>
-                            <Card.Img height={'180px'} variant="top" src={product?.photograph} />
+                        <Card className='shadow rounded' style={{height:'420px',width:'420px'}}>
+                            <Card.Img height={'300px'} variant="top" src={product?.photograph} />
                             <Card.Body>
-                                <Card.Title>{product?.name.slice(0,20)}...</Card.Title>
+                                <Card.Title>{product?.name}</Card.Title>
                                 <h5>{product?.neighborhood}</h5>
-                                <div className='text-center mt-3'><Link to={`/${product?.id}/view`}>View More...</Link></div>
+                                <div className='mt-2'><Link to={`/${product?.id}/view`}>View More...</Link></div>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -56,18 +56,38 @@ const Restaurant = () => {
                 </Row>
                 }
             </div>
-            <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        Next
-      </button>
+            <div style={{textAlign:'center'}}>
+              <button style={{
+            padding: '10px 20px',
+            margin: '0 5px',
+            backgroundColor: '#007bff',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+            opacity: currentPage === 1 ? '0.5' : '1'
+          }}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button  style={{
+            padding: '10px 20px',
+            margin: '0 5px',
+            backgroundColor: '#007bff',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+            opacity: currentPage === totalPages ? '0.5' : '1'
+          }}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+            </div>
     </div>
   )
 }

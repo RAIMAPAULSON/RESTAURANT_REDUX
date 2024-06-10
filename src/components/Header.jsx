@@ -22,8 +22,26 @@ const Header = ({insideHeader}) => {
           <Nav className="ms-auto">
           {insideHeader &&
             <Nav.Link >
-              <input onChange={e=>dispatch(searchRestaurant(e.target.value.toLowerCase()))} type="text" style={{width:'280px'}} className='rounded p-1' placeholder='Search restaurant!!!' />
-              <button className='bg-warning p-1 rounded text-white ms-2'>Search</button>
+              {/* <input <i className="fa-solid fa-magnifying-glass"></i> onChange={e=>dispatch(searchRestaurant(e.target.value.toLowerCase()))} type="text" style={{width:'280px'}} className='rounded p-1' placeholder='Search restaurant!!!' /> */}
+              <div style={{ position: 'relative', width: '280px', marginBottom: '20px' }}>
+        <input 
+          type="text" 
+          onChange={e => dispatch(searchRestaurant(e.target.value.toLowerCase()))} 
+          style={{ width: '100%', padding: '10px 40px 10px 10px', borderRadius: '5px' }} 
+          className='rounded p-1' 
+          placeholder='Search restaurant!!!' 
+        />
+        <i 
+          className="fa-solid fa-magnifying-glass" 
+          style={{
+            position: 'absolute', 
+            top: '50%', 
+            right: '10px', 
+            transform: 'translateY(-50%)', 
+            color: '#aaa'
+          }}
+        ></i>
+      </div>
             </Nav.Link>
           }
           </Nav>
