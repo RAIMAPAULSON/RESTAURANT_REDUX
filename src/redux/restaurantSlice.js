@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchRestaurantDetails= createAsyncThunk('restaurants/fetchRestaurantDetails',async()=>{
-    const result = await axios.get("http://localhost:3000/restaurants")
-    return result.data;
+export const fetchRestaurantDetails= createAsyncThunk('restaurants/fetchRestaurantDetails',async(page=1)=>{
+    const result = await axios.get(`http://localhost:3000/restaurants?_page=${page}&_per_page=4`);
+    console.log("-----------???-",result)
+    return result.data.data;
 })
 const restaurantSlice = createSlice({
     name:'restaurants',
@@ -11,17 +12,21 @@ const restaurantSlice = createSlice({
         allRestaurants:[],
         allRestaurantsDummy:[],
         Loading:false,
+        currentPage:1,
         error:""
     },
     reducers:{
        searchRestaurant:(state,action)=>{
         state.allRestaurants=state.allRestaurantsDummy.filter(item=>item.neighborhood.toLowerCase().includes(action.payload))
+       },
+       setcurrentPage:(state,action)=>{
+        state.currentPage=action.payload;
        }
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchRestaurantDetails.fulfilled,(state,action)=>{
-            state.allRestaurants=action.payload,
-            state.allRestaurantsDummy=action.payload,
+            state.allRestaurants=action.payload.data,
+            state.allRestaurantsDummy=action.payload.data,
             state.Loading=false,
             state.error=""
         })
@@ -42,7 +47,7 @@ const restaurantSlice = createSlice({
 
 
 export default restaurantSlice.reducer
-export const {searchRestaurant}=restaurantSlice.actions
+export const {searchRestaurant,setcurrentPage}=restaurantSlice.actions
 
 
 
