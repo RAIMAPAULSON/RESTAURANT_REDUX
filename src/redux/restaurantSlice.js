@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchRestaurantDetails= createAsyncThunk('restaurants/fetchRestaurantDetails',async(page=1)=>{
-    const result = await axios.get(`http://localhost:3000/restaurants?_page=${page}&_per_page=4`);
+    const result = await axios.get(`https://restaurantredux-server.onrender.com/restaurants?_page=${page}&_per_page=4`);
     console.log("-----------???-",result)
-    localStorage.setItem("allRestaurants",JSON.stringify(result.data.data));
-    return result.data.data;
+    localStorage.setItem("allRestaurants",JSON.stringify(result.data));
+    return result.data;
 })
 const restaurantSlice = createSlice({
     name:'restaurants',
